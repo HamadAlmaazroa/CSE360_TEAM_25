@@ -12,13 +12,13 @@ User stories:
 -As a registered player, I want to make a guess, so that if the difference between the guessed number and actual number is greater than 10, the other player gets 3 points (i.e. 6 guessed number > 10).
 -As a registered player, I want to know if the number is even or odd by choosing “even or odd” on the question board help, so that I earn half the points points if I get it right. 
 -As a registered player, I want to know what range the number lies on by choosing “make range” on  the question board help, so that I earn 5 points if I get it right. 
--As a registered player, I want to say congratulation to the other player who won the game, so that I. 
+-As a registered player, I want to say congratulation, so that I congratulate the winning player. 
 -As a registered player, I want to view my statistics, to keep track of my standing in the game.
--As database, I want to be able to access the game, so that I record the statistics
+-As database, I want to be able to access the game, so that I record the statistics.
 -As database, I want to be able to record statistics, to be able to keep track of the scores.
--As database, I want to be able to access the registration, so that I register a player’s name in the database.
--As database, I want to be able to access the registration, so that I register a player’s username in the database.
--As database, I want to be able to access the registration, so that I register a player’s age in the database.
+-As database, I want to be able to register a player’s name in the database, so that I update the statistics.
+-As database, I want to be able to I register a player’s username in the database, so that I update the statistics.
+-As database, I want to be able to register a player’s age in the database, so that I update the statistics.
 
 
 
