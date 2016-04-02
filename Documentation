@@ -1,43 +1,38 @@
 User stories:
--As a player, I want to be able to record my full name, to save my statistics in the game.
--As a player, I want to be able to record my email, to save my statistics in the game.
--As a player, I want to be able to record my age, to save my statistics in the game.
+-As a player, I want to be able to record my full name, so that I save my statistics in the game.
+
+-As a player, I want to be able to record my email, so that I save my statistics in the game.
+
+-As a player, I want to be able to record my age, so that I save my statistics in the game.
+
 -As a player, I want to register for the game, to be able to access the game easily.
+
 -As a registered player, I want to play the game, so that I win the game.
--As a registered player, I want to reach 30 points, to win the game.
--As a registered player, I want to have a difference of 20 points or more with the other player, to win the game.
--As a registered player, I want to get 15 points if guessed number matches actual number, to be ahead of the second player.
--As a registered player, I want to get 4 points if the difference between the guessed number and actual number is between 1 and 5, so that I win the game.  (i.e. 1<= guessed number <=5).
+
+-As a registered player, I want to reach 30 points, so that I win the game.
+
+-As a registered player, I want to have a difference of 20 points or more with the other player, so that I win the game.
+
+-As a registered player, I want to make a guess, so that I get 15 points if guessed number matches.
+
+-As a registered player, I want to make a guess, so that I get 4 points if the difference between the guessed number and actual number is between 1 and 5 (i.e. 1<= guessed number <=5).
+
 -As a registered player, I want to make a guess, so that I get 2 points if the difference between the guessed number and actual number is between 6 and 10 (i.e. 6 <= guessed number <= 10).
--As a registered player, I want to make a guess, so that if the difference between the guessed number and actual number is greater than 10, the other player gets 3 points (i.e. 6 guessed number > 10).
+
+-As a registered player, I want to make a guess, so that the other player earn 3 points if the difference between the guessed number and actual number is greater than 10 (i.e. guessed number > 10).
+
 -As a registered player, I want to know if the number is even or odd by choosing “even or odd” on the question board help, so that I earn half the points points if I get it right. 
+
 -As a registered player, I want to know what range the number lies on by choosing “make range” on  the question board help, so that I earn 5 points if I get it right. 
--As a registered player, I want to say congratulation, so that I congratulate the winning player. 
+
 -As a registered player, I want to view my statistics, to keep track of my standing in the game.
+
 -As database, I want to be able to access the game, so that I record the statistics.
--As database, I want to be able to record statistics, to be able to keep track of the scores.
--As database, I want to be able to register a player’s name in the database, so that I update the statistics.
--As database, I want to be able to I register a player’s username in the database, so that I update the statistics.
--As database, I want to be able to register a player’s age in the database, so that I update the statistics.
 
+-As database, I want to be able to record statistics, so that one player wins the game
 
+-As database, I want to be able to register a player’s name in the database, so that I link a player's statistics with his name.
 
+-As database, I want to be able to I register a player’s email in the database, so that I link a player's statistics with his email.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-As database, I want to be able to register a player’s age in the database, so that I link a player's statistics with his age.
