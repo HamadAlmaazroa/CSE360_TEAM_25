@@ -13,7 +13,9 @@ User stories:
 -As a registered player, I want to have an even or odd option on the question board help, so that I earn half the points points if I get it right. 
 -As a registered player, I want to have a range option on  the question board help, so that I earn 5 points if I get it right using this option. 
 -As a registered player, I want to view my statistics, to keep track of my standing in the game.
-
+-As a registered player, I want to be able to play in challenge mode, to make the game last longer.
+-As a registered player, I want to be able to play in normal mode, to finish the game faster.
+-As a registered player, I want to be able to play in normal mode, to avoid losing more points.
 -As database, I want to be able to access the game, so that I record the statistics.
 -As database, I want to be able to record statistics, so that one player wins the game.
 -As database, I want to be able to register players in the game, so that I can link players' statistics with their information.
