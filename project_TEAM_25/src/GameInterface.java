@@ -196,7 +196,7 @@ public class GameInterface extends JFrame {
    	 *  */
     private JPanel fillScoresList()
     {
-        Database printingScores = new Database();		
+         Database printingScores = new Database();		
     	List list = printingScores.getScoreList();		// getting the List of the core from the dataBase
         int numberOfData = 10;							// number of data per column
     	JPanel temp = new JPanel(new GridLayout(numberOfData,2));
@@ -214,8 +214,13 @@ public class GameInterface extends JFrame {
              	str2 = (i + numberOfData) + ") " + list.get((i + numberOfData) - 1);
              else
             	 str2 = (i + numberOfData) + ")";
-         	 temp.add(new JLabel(str));
-         	 temp.add(new JLabel(str2));
+         	
+         	 JLabel tempLabel1 = new JLabel(str);
+ 			 tempLabel1.setFont(new Font("", Font.PLAIN, 24));
+         	 temp.add(tempLabel1);
+         	 JLabel tempLabel2 = new JLabel(str2);
+ 			 tempLabel2.setFont(new Font("", Font.PLAIN, 24));
+         	 temp.add(tempLabel2);
          }
          return temp;
     }
