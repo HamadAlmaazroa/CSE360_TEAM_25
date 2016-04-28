@@ -284,5 +284,28 @@ public class GameEngine {
 		return winner;
 	}
 
-	
+	/**
+	 * getMachedDicesNum - returns the number of matched dices 
+	 * @return winner
+	 */
+	public int getMachedDicesNum()
+	{
+		int machedDices = 0;
+		int currentCount = 0;
+		int diceArray[] = {dice1,dice2,dice3,dice4,dice5,dice6};
+		
+		for(int dice = 1; dice <= 6; dice++)
+		{
+			for(int diceInner = 1; diceInner <= 6; diceInner++)
+			{
+				if(diceArray[dice-1] == diceArray[diceInner-1])
+					currentCount++;
+			}
+			if(currentCount > machedDices)
+				machedDices = currentCount;
+			currentCount = 0;
+		}
+		
+		return machedDices;
+	}
 }
