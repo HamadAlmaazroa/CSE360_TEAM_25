@@ -128,9 +128,10 @@ public class GameInterface extends JFrame {
    	 *  */
     private JLabel createImageLabel(String fileName,int widthScale, int heightScale, int x, int y, int width, int height)
     {
+    	URL url = GameInterface.class.getResource(fileName);
     	JLabel temp = new JLabel();
     	temp = new JLabel();
-        ImageIcon imageIcon2 = new ImageIcon(fileName); // load the image to a imageIcon
+        ImageIcon imageIcon2 = new ImageIcon(url); // load the image to a imageIcon
         Image image2 = imageIcon2.getImage(); // transform it 
         Image newimg2 = image2.getScaledInstance(widthScale, heightScale,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon2 = new ImageIcon(newimg2);  // transform it back
@@ -231,11 +232,12 @@ public class GameInterface extends JFrame {
     {
         JPanel scoreList, scoreButtonPanel;
         JLabel scoresTitleLabel;
-        JButton backFromScoresB;
+        JButton backFromScoresB, resetScoresB;
+        Database dataBase = new Database();		
 
         gameScoresPage = new JPanel(new BorderLayout());
   	    scoresTitleLabel = new JLabel("Game Scores", SwingConstants.CENTER);
-  	    scoresTitleLabel.setFont(new Font("Serif", Font.PLAIN, 24));
+  	    scoresTitleLabel.setFont(new Font("Serif", Font.PLAIN, 50));
         gameScoresPage.add(scoresTitleLabel, BorderLayout.PAGE_START);
         
         //filling the panel with the scores
@@ -243,6 +245,8 @@ public class GameInterface extends JFrame {
         gameScoresPage.add(scoreList,BorderLayout.CENTER);
        
         backFromScoresB = new JButton("Back to title page");
+        backFromScoresB.setPreferredSize(new Dimension(250, 40));
+        backFromScoresB.setFont(new Font("SansSerif", Font.PLAIN, 25));
         backFromScoresB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -251,8 +255,21 @@ public class GameInterface extends JFrame {
             }
         });
         
+        resetScoresB = new JButton("Reset Scores");
+        resetScoresB.setPreferredSize(new Dimension(200, 40));
+        resetScoresB.setFont(new Font("SansSerif", Font.PLAIN, 25));
+        resetScoresB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+            	dataBase.resetScores();
+                CardLayout cl = (CardLayout) (pagesCards.getLayout());
+                cl.show(pagesCards, titlePagePanelRef);
+            }
+        });
+        
         scoreButtonPanel = new JPanel();
         scoreButtonPanel.add(backFromScoresB);
+        scoreButtonPanel.add(resetScoresB);
         gameScoresPage.add(scoreButtonPanel,BorderLayout.PAGE_END);
     }
 
