@@ -15,19 +15,22 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
-
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import java.net.URL;
 
 public class GameInterface extends JFrame {
 
@@ -86,7 +89,7 @@ public class GameInterface extends JFrame {
 
         
         frame.add(pagesCards);
-        frame.setPreferredSize(new Dimension(350, 300));
+        frame.setPreferredSize(new Dimension(800, 600));
         frame.pack();
         frame.setTitle( "Dice Game" );
         frame.setVisible(true);
@@ -145,18 +148,20 @@ public class GameInterface extends JFrame {
         JLabel titleJLabel, dieImgJLabel, dieImgJLabel2;
         JButton titleToScoresB, titlePlayB;
 
-    	titlePagePanel = new JPanel(null);
+   	titlePagePanel = new JPanel(null);
         
-    	titleJLabel = createLabel("Dice Game", 29, 70, 40, 150, 64, Color.black);
+    	titleJLabel = createLabel("Dice Game", 60, 200, 100, 500, 100, Color.black);
    	    titlePagePanel.add(titleJLabel);
         
-   	    dieImgJLabel = createImageLabel("Images//DiesImg.png",30, 29, 210, 40, 64, 64);
+   	    dieImgJLabel = createImageLabel("DiesImg.png",60, 59, 485, 120, 64, 64);
         titlePagePanel.add(dieImgJLabel);
         
-        dieImgJLabel2 = createImageLabel("Images//dice.png", 138, 112,  202, 140, 132, 112);
+        dieImgJLabel2 = createImageLabel("dice.png", 280, 227,  515, 290, 300, 300);
         titlePagePanel.add(dieImgJLabel2);
         
         titleToScoresB = new JButton("View Scores");
+        titleToScoresB.setPreferredSize(new Dimension(220, 50));
+        titleToScoresB.setFont(new Font("Serif", Font.PLAIN, 30));
         titleToScoresB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -168,6 +173,8 @@ public class GameInterface extends JFrame {
         });
 
         titlePlayB = new JButton("Play Game");
+        titlePlayB.setPreferredSize(new Dimension(200, 50));
+        titlePlayB.setFont(new Font("Serif", Font.PLAIN, 30));
         titlePlayB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -179,7 +186,7 @@ public class GameInterface extends JFrame {
         titleButtonPanel = new JPanel();
         titleButtonPanel.add(titlePlayB);
         titleButtonPanel.add(titleToScoresB);
-        titleButtonPanel.setBounds( 70, 120, 200, 100 );
+        titleButtonPanel.setBounds( 230, 230, 250, 250 );
         titlePagePanel.add(titleButtonPanel, BorderLayout.SOUTH);
     }
     
