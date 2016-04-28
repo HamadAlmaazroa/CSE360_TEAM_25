@@ -277,31 +277,64 @@ public class GameInterface extends JFrame {
    	 *  */
     private void namePage()
     {
-        JPanel nameButtonPanel;
+           JPanel nameButtonPanel;
         JLabel namePageJLabel, player1NameLabel, player2NameLabel;
         JButton nameBackToTitleB, nametoGameB;
+        JRadioButton normalRadio, challengeRadio;
         JTextField player1NameText, player2NameText; 
     	
     	namePage = new JPanel(null);
         
-    	namePageJLabel = createLabel("Name of Players",24, 100, 0, 350, 65, Color.black);
+    	namePageJLabel = createLabel("Name of Players",70, 180, 0, 500, 100, Color.black);
         namePage.add(namePageJLabel); 
         
-    	player1NameLabel = createLabel("Player 1 name:",15,20, 40, 150, 64, Color.black);
+    	player1NameLabel = createLabel("Player 1 name:",35,20, 130, 300, 64, Color.black);
         namePage.add(player1NameLabel); 
         
-        player2NameLabel = createLabel("Player 2 name:",15,20, 80, 150, 64, Color.black);
+        player2NameLabel = createLabel("Player 2 name:",35,20, 200, 300, 64, Color.black);
         namePage.add(player2NameLabel);
         
         player1NameText = new JTextField();
-        player1NameText.setBounds( 110, 65, 150, 20 );
+        player1NameText.setFont(new Font("SansSerif", Font.PLAIN, 25));
+        player1NameText.setBounds( 250, 150, 300, 40 );
         namePage.add(player1NameText); 
 
         player2NameText = new JTextField();
-        player2NameText.setBounds( 110, 105, 150, 20 );
+        player2NameText.setFont(new Font("SansSerif", Font.PLAIN, 25));
+        player2NameText.setBounds( 250, 220, 300, 40 );
         namePage.add(player2NameText);
+
+        normalRadio = new JRadioButton("Normal Mode", true);
+        normalRadio.setMnemonic(KeyEvent.VK_C);
+        normalRadio.setBounds(200, 300, 200, 50);
+        normalRadio.setFont(new Font("SansSerif.bold", Font.PLAIN, 22));
+        normalRadio.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {         
+               challengingMode = false;
+            }           
+         });
         
+        challengeRadio = new JRadioButton("Challenge Mode");
+        challengeRadio.setMnemonic(KeyEvent.VK_M);
+        challengeRadio.setBounds(400, 300, 250, 50);
+        challengeRadio.setFont(new Font("SansSerif.bold", Font.PLAIN, 22));
+        challengeRadio.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {             
+            	challengingMode = true;
+            }           
+         });
+
+       //Group the radio buttons.
+         ButtonGroup group = new ButtonGroup();
+         group.add(normalRadio);
+         group.add(challengeRadio);
+         
+         namePage.add(normalRadio);
+         namePage.add(challengeRadio);
+
         nameBackToTitleB = new JButton("Back to title page");
+        nameBackToTitleB.setPreferredSize(new Dimension(300, 50));
+        nameBackToTitleB.setFont(new Font("Serif", Font.PLAIN, 30));
         nameBackToTitleB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -310,14 +343,17 @@ public class GameInterface extends JFrame {
             }
         });
         
-        nametoGameB = new JButton("continue");
+        nametoGameB = new JButton("Continue");
+        nametoGameB.setPreferredSize(new Dimension(220, 50));
+        nametoGameB.setFont(new Font("Serif", Font.PLAIN, 30));
         nametoGameB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
             	initGame();								// Initializing the values for the game.
             	player1.setName(player1NameText.getText());
             	player2.setName(player2NameText.getText());
-            	update();								// updating the names of the players before starting the game
+            	update();								// updating the names of the players before starting the game.
+                pagesCards.add(gameplayPage,gamePlayPageRef);
                 CardLayout cl = (CardLayout) (pagesCards.getLayout());//get cards
                 cl.show(pagesCards, gamePlayPageRef);             
             }
@@ -326,7 +362,7 @@ public class GameInterface extends JFrame {
         nameButtonPanel = new JPanel();
         nameButtonPanel.add(nametoGameB);
         nameButtonPanel.add(nameBackToTitleB);
-        nameButtonPanel.setBounds( 10, 165, 330, 350 );
+        nameButtonPanel.setBounds( 120, 400, 550, 350 );
         namePage.add(nameButtonPanel, BorderLayout.SOUTH);
     }
     
