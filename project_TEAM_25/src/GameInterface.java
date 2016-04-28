@@ -403,7 +403,7 @@ public class GameInterface extends JFrame {
     private void gamePlayPage()
     {
         JPanel currentGameTPanel,currentGameGPanel, optionBoredPanel,optionBoredBPanel;
-        JLabel dieImgJLabel3, lastValue ;
+        JLabel dieImgJLabel3, lastValue, lastScoreP1, lastScoreP2;
         JButton optionBoardButton, optionBBack, evenOddButton, rangeButton, makeGuessB ;
         JComboBox<Integer> comboCount ;
         final JPanel currentGameCards = new JPanel(new CardLayout()), optionBoardCards = new JPanel(new CardLayout());;
@@ -411,28 +411,41 @@ public class GameInterface extends JFrame {
         
        	gameplayPage = new JPanel(null);
        	
-       	dieImgJLabel3 = createImageLabel("Images//dice_shaker.png",164, 135,  170, -18, 164, 135);
+       	dieImgJLabel3 = createImageLabel("dice_shaker.png",280, 230,  500, -18, 280, 230);
         gameplayPage.add(dieImgJLabel3);
-       	
-        gamePagePlayer1Score = createLabel("Player 1 Score: "+player1.getScore(),18, 0, 0, 200, 65, Color.black);
+        
+        diceImg1 = new JLabel();
+        diceImg2 = new JLabel();
+        diceImg3 = new JLabel();
+        diceImg4 = new JLabel();  
+        diceImg5 = new JLabel();
+        diceImg6 = new JLabel();
+        
+        gamePagePlayer1Score = createLabel("Player 1 Score: "+player1.getScore(),25, 0, 0, 300, 65, Color.black);
         gameplayPage.add(gamePagePlayer1Score); 
         
-        gamePagePlayer2Score = createLabel("Player 2 Score: "+player2.getScore(),18, 0, 25, 200, 65, Color.black);
+        gamePagePlayer2Score = createLabel("Player 2 Score: "+player2.getScore(),25, 0, 40, 300, 65, Color.black);
         gameplayPage.add(gamePagePlayer2Score);
         
-        currentTurnLabel = createLabel("Player 1 Turn ("+player1.getName()+")",18, 0, 50, 350, 65, Color.red);
+        currentTurnLabel = createLabel("Player 1 Turn ("+player1.getName()+")",25, 0, 80, 480, 65, Color.red);
         gameplayPage.add(currentTurnLabel);
 
-        lastValue = createLabel("",18, 0, 70, 350, 65, Color.black);
+        lastValue = createLabel("",25, 0, 120, 400, 65, Color.black);
         gameplayPage.add(lastValue);
         
-        winnerLabel = createLabel("",20,0, 90, 350, 65 , Color.magenta);
+        lastScoreP1 = createLabel("",25, 0, 160, 400, 65, Color.blue);
+        gameplayPage.add(lastScoreP1);
+        
+        lastScoreP2 = createLabel("",25, 0, 200, 400, 65, Color.blue);
+        gameplayPage.add(lastScoreP2);
+        
+        winnerLabel = createLabel("", 40, 310, 260, 350, 65 , Color.magenta);
         gameplayPage.add(winnerLabel);
        	
-        helpRangeText = createLabel("",15,190, 80, 200, 65, Color.blue);
+        helpRangeText = createLabel("",25,500, 300, 300, 65, Color.blue);
         gameplayPage.add(helpRangeText);
         
-        helpEvenOddText = createLabel("",15, 190, 100, 200, 65, Color.blue);
+        helpEvenOddText = createLabel("",25, 500, 340, 300, 65, Color.blue);
         gameplayPage.add(helpEvenOddText);
         
         
@@ -508,13 +521,45 @@ public class GameInterface extends JFrame {
                 	optionBoardButton.setVisible(true);
                 	playerTroTurn = false;
                 	lastValue.setText("");
+                	lastScoreP1.setText("");
+                  	lastScoreP2.setText("");
                 	if(currentFirstPlayer == player1)
                 		currentPlayer = 2;
                 	else
                 		currentPlayer = 1;
-                	update();              	
-            	  CardLayout cl = (CardLayout) (currentGameCards.getLayout());//get cards
-                  cl.show(currentGameCards, guessingRef);
+                	update();
+
+                	dieImgJLabel3.setVisible(false);
+                	diceImg1.setVisible(false);
+                    diceImg1 = createImageLabel("red-dice-hi.png",100, 100,  450, 10, 100, 100);
+                    gameplayPage.add(diceImg1);
+                    
+                    diceImg2.setVisible(false);
+                    diceImg2 = createImageLabel("red-dice-hi.png",100, 100,  560, 10, 100, 100);
+                    gameplayPage.add(diceImg2);
+                    
+                    diceImg3.setVisible(false);
+                    diceImg3 = createImageLabel("red-dice-hi.png",100, 100,  670, 10, 100, 100);
+                    gameplayPage.add(diceImg3);
+                    
+                    diceImg4.setVisible(false);
+                    diceImg4 = createImageLabel("red-dice-hi.png",100, 100,  450, 115, 100, 100);
+                    gameplayPage.add(diceImg4);
+                    
+                    diceImg5.setVisible(false);
+                    diceImg5 = createImageLabel("red-dice-hi.png",100, 100,  560, 115,  100, 100);
+                    gameplayPage.add(diceImg5);
+                    
+                    diceImg6.setVisible(false);
+                    diceImg6 = createImageLabel("red-dice-hi.png",100, 100,  670, 115,  100, 100);
+                    gameplayPage.add(diceImg6);
+                    
+                    pagesCards.add(gameplayPage,gamePlayPageRef);
+                    CardLayout c2 = (CardLayout) (pagesCards.getLayout());//get cards
+                    c2.show(pagesCards, gamePlayPageRef);
+
+            	    CardLayout cl = (CardLayout) (currentGameCards.getLayout());//get cards
+                    cl.show(currentGameCards, guessingRef);
             	
             }
         });
