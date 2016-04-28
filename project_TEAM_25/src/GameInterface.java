@@ -48,13 +48,13 @@ public class GameInterface extends JFrame {
     private final static String optionsBoredButtonRef = "optionsBoredButton";
     private final static String optionsBoredRef = "optionsBored";
 
-
     private JPanel pagesCards, titlePagePanel, namePage, gameScoresPage, gameplayPage;
     private JLabel winnerLabel, gamePagePlayer1Score, gamePagePlayer2Score, currentTurnLabel,helpRangeText,helpEvenOddText;
+    private JLabel diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6;
     private JButton playAnother,  throwDiceB;
     private Player player1, player2, currentFirstPlayer, currentSecondPlayer;
     private String rangeM , evenOddM;
-    private boolean playerTroTurn;
+    private boolean playerTroTurn, challengingMode;
     private int currentPlayer;
         
     /** The constructor of the class it create a new JPanel for the cards layout of the main frame.
@@ -66,6 +66,7 @@ public class GameInterface extends JFrame {
     	pagesCards = new JPanel(new CardLayout());
         player1=new Player();
         player2=new Player();
+        challengingMode = false;
         initComponents();
     }
     
@@ -149,7 +150,7 @@ public class GameInterface extends JFrame {
         JLabel titleJLabel, dieImgJLabel, dieImgJLabel2;
         JButton titleToScoresB, titlePlayB;
 
-   	titlePagePanel = new JPanel(null);
+    	titlePagePanel = new JPanel(null);
         
     	titleJLabel = createLabel("Dice Game", 60, 200, 100, 500, 100, Color.black);
    	    titlePagePanel.add(titleJLabel);
@@ -197,7 +198,7 @@ public class GameInterface extends JFrame {
    	 *  */
     private JPanel fillScoresList()
     {
-         Database printingScores = new Database();		
+        Database printingScores = new Database();		
     	List list = printingScores.getScoreList();		// getting the List of the core from the dataBase
         int numberOfData = 10;							// number of data per column
     	JPanel temp = new JPanel(new GridLayout(numberOfData,2));
@@ -277,7 +278,7 @@ public class GameInterface extends JFrame {
    	 *  */
     private void namePage()
     {
-           JPanel nameButtonPanel;
+        JPanel nameButtonPanel;
         JLabel namePageJLabel, player1NameLabel, player2NameLabel;
         JButton nameBackToTitleB, nametoGameB;
         JRadioButton normalRadio, challengeRadio;
@@ -396,7 +397,7 @@ public class GameInterface extends JFrame {
     	helpRangeText.setText(rangeM);
     	helpEvenOddText.setText(evenOddM);
     }
-    
+      
     /** The method for the initiation of the name page and its buttons, and labels.
      * 	and the buttons ActionListener for navigating throw the game
    	 *  */
@@ -459,24 +460,30 @@ public class GameInterface extends JFrame {
     		numbers[i] = (i+6);
 
     	comboCount = new JComboBox<Integer>(numbers);
-    	comboCount.setBounds( 23, 30, 60, 25 );
+    	comboCount.setFont(new Font("SansSerif", Font.PLAIN, 25));
+    	comboCount.setBounds( 70, 110, 60, 40 );
       	currentGameGPanel.add(comboCount);
       	
     	playAnother = new JButton("Play Another Game");
-		playAnother.setBounds( 10, 150, 150, 25 );
+    	playAnother.setFont(new Font("SansSerif", Font.PLAIN, 25));
+		playAnother.setBounds( 270, 325, 300, 40 );
 		playAnother.setVisible(false);
 		gameplayPage.add(playAnother);
 		playAnother.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent ae) {
                   	lastValue.setText("");
+                  	lastScoreP1.setText("");
+                  	lastScoreP2.setText("");
                   	CardLayout cl = (CardLayout) (pagesCards.getLayout());//get cards
                     cl.show(pagesCards, namePageRef);            	
               }
           });
 		 	
         optionBoardButton = new JButton("Options Board");
-        optionBoardButton.setBounds(15, 40, 115, 25);
+        //optionBoardButton.setPreferredSize(new Dimension(350, 40));
+        optionBoardButton.setFont(new Font("SansSerif", Font.PLAIN, 25));
+        optionBoardButton.setBounds(30, 40, 250, 40);
         optionBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -486,6 +493,8 @@ public class GameInterface extends JFrame {
         });
 
         optionBBack = new JButton("Back");
+        optionBBack.setPreferredSize(new Dimension(150, 40));
+        optionBBack.setFont(new Font("SansSerif", Font.PLAIN, 25));
         optionBBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -495,6 +504,8 @@ public class GameInterface extends JFrame {
         });
         
         evenOddButton = new JButton("Even Or Odd");
+        evenOddButton.setPreferredSize(new Dimension(220, 40));
+        evenOddButton.setFont(new Font("SansSerif", Font.PLAIN, 25));
         evenOddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -504,6 +515,8 @@ public class GameInterface extends JFrame {
         });
         
         rangeButton = new JButton("Range");
+        rangeButton.setPreferredSize(new Dimension(180, 40));
+        rangeButton.setFont(new Font("SansSerif", Font.PLAIN, 25));
         rangeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -513,7 +526,9 @@ public class GameInterface extends JFrame {
         });
         
         throwDiceB = new JButton("throw the dices");
-        throwDiceB.setBounds( 10, 65, 135, 25 );
+        throwDiceB.setPreferredSize(new Dimension(250, 40));
+        throwDiceB.setFont(new Font("SansSerif", Font.PLAIN, 25));
+        throwDiceB.setBounds( 50, 180, 220, 40 );
     	throwDiceB.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
@@ -565,43 +580,100 @@ public class GameInterface extends JFrame {
         });
     	
     	makeGuessB = new JButton("make a guess");
-    	makeGuessB.setBounds( 23, 65, 115, 25 );
+    	makeGuessB.setFont(new Font("SansSerif", Font.PLAIN, 25));
+    	makeGuessB.setBounds( 50, 180, 220, 40 );
     	makeGuessB.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                 	optionBoardButton.setVisible(false);
                 		playerTroTurn = true;
-                		lastValue.setText("last total of the dices was: "+engine.getTotalDices());
+                		lastValue.setText("The total of the last dices was: "+engine.getTotalDices());
                 		engine.updateGuessedNum((Integer)comboCount.getSelectedItem());
-                		currentSecondPlayer.updateScore(engine.getScore());
-                		currentFirstPlayer.updateScore(engine.getP2Score());
-                	if(currentFirstPlayer == player1)
-                	{
-                		currentPlayer = 2;
-                		currentFirstPlayer = player2;
-                		currentSecondPlayer = player1;
-                	}
-                	else
-                	{
-                		currentPlayer = 1;
-                		currentFirstPlayer = player1;
-                		currentSecondPlayer = player2;
-                	}
-                	rangeM = "";
-                	evenOddM = "";
-                	update();
-                	if(engine.gameEnded(player1, player2))
-                	{
-                		winnerLabel.setText(engine.getWinner());
-                  	  	winnerLabel.setVisible(true);
-                		playAnother.setVisible(true);
-                		throwDiceB.setVisible(false);
-                	}
-            	  CardLayout cl = (CardLayout) (currentGameCards.getLayout());//get cards
-                  cl.show(currentGameCards, throwDiceRef);
-                  CardLayout c2 = (CardLayout) (optionBoardCards.getLayout());//get cards
-                  c2.show(optionBoardCards, optionsBoredRef);
-            	
+                		int player2CurrentScore = engine.getScore();
+                		int player1CurrentScore = engine.getP2Score();
+                		currentSecondPlayer.updateScore(player2CurrentScore);
+                		currentFirstPlayer.updateScore(player1CurrentScore);
+                	
+                		if(challengingMode)
+                			currentSecondPlayer.updateScore((-1)*engine.getMachedDicesNum());
+                		
+                		if(currentSecondPlayer == player1 && !challengingMode)
+                		{
+	                		lastScoreP1.setText("Player 1 got "+ player2CurrentScore +" points.");
+	                      	lastScoreP2.setText("Player 2 got "+ player1CurrentScore +" points.");
+                		}
+                		else if(currentSecondPlayer == player2 && !challengingMode)
+                		{
+                			lastScoreP1.setText("Player 1 got "+ player1CurrentScore +" points.");
+	                      	lastScoreP2.setText("Player 2 got "+ player2CurrentScore +" points.");
+                		}
+                		else if(currentSecondPlayer == player1 && challengingMode)
+                		{
+	                		lastScoreP1.setText("Player 1 got "+ player2CurrentScore +" points, and lost "+ engine.getMachedDicesNum() +" pints.");
+	                      	lastScoreP2.setText("Player 2 got "+ player1CurrentScore +" points.");
+                		}
+                		else if(currentSecondPlayer == player2 && challengingMode)
+                		{
+                			lastScoreP1.setText("Player 1 got "+ player1CurrentScore +" points.");
+	                      	lastScoreP2.setText("Player 2 got "+ player2CurrentScore +" points, and lost "+ engine.getMachedDicesNum() +" pints.");
+                		}
+                		
+	                	if(currentFirstPlayer == player1)
+	                	{
+	                		currentPlayer = 2;
+	                		currentFirstPlayer = player2;
+	                		currentSecondPlayer = player1;
+	                	}
+	                	else
+	                	{
+	                		currentPlayer = 1;
+	                		currentFirstPlayer = player1;
+	                		currentSecondPlayer = player2;
+	                	}
+	                	rangeM = "";
+	                	evenOddM = "";
+	                	update();
+	                	if(engine.gameEnded(player1, player2))
+	                	{
+	                		winnerLabel.setText(engine.getWinner());
+	                  	  	winnerLabel.setVisible(true);
+	                		playAnother.setVisible(true);
+	                		throwDiceB.setVisible(false);
+	                	}
+	                	
+						dieImgJLabel3.setVisible(false);
+						diceImg1.setVisible(false);
+						diceImg1 = createImageLabel("die_face_"+engine.getDice1()+".png",100, 100,  450, 10, 100, 100);
+						gameplayPage.add(diceImg1);
+						
+						diceImg2.setVisible(false);
+						diceImg2 = createImageLabel("die_face_"+engine.getDice2()+".png",100, 100,  560, 10, 100, 100);
+						gameplayPage.add(diceImg2);
+						
+						diceImg3.setVisible(false);
+						diceImg3 = createImageLabel("die_face_"+engine.getDice3()+".png",100, 100,  670, 10, 100, 100);
+						gameplayPage.add(diceImg3);
+						
+						diceImg4.setVisible(false);
+						diceImg4 = createImageLabel("die_face_"+engine.getDice4()+".png",100, 100,  450, 115, 100, 100);
+						gameplayPage.add(diceImg4);
+						
+						diceImg5.setVisible(false);
+						diceImg5 = createImageLabel("die_face_"+engine.getDice5()+".png",100, 100,  560, 115, 100, 100);
+						gameplayPage.add(diceImg5);
+						
+						diceImg6.setVisible(false);
+						diceImg6 = createImageLabel("die_face_"+engine.getDice6()+".png",100, 100,  670, 115, 100, 100);
+						gameplayPage.add(diceImg6);
+						
+						pagesCards.add(gameplayPage,gamePlayPageRef);
+						CardLayout c3 = (CardLayout) (pagesCards.getLayout());//get cards
+						c3.show(pagesCards, gamePlayPageRef);
+		            	CardLayout cl = (CardLayout) (currentGameCards.getLayout());//get cards
+		                cl.show(currentGameCards, throwDiceRef);
+		                CardLayout c2 = (CardLayout) (optionBoardCards.getLayout());//get cards
+		                c2.show(optionBoardCards, optionsBoredRef);
+		            	
             }
         });
  	
@@ -612,14 +684,14 @@ public class GameInterface extends JFrame {
 
         currentGameTPanel.add(throwDiceB);
         currentGameGPanel.add(makeGuessB);
-
+        
         currentGameCards.add(currentGameTPanel,throwDiceRef);
         currentGameCards.add(currentGameGPanel,guessingRef);
-        currentGameCards.setBounds(0, 150, 175, 100);
+        currentGameCards.setBounds(0, 300, 300, 300);
         
         optionBoardCards.add(optionBoredPanel,optionsBoredRef);
         optionBoardCards.add(optionBoredBPanel,optionsBoredButtonRef);   
-        optionBoardCards.setBounds(190, 150, 140, 200);
+        optionBoardCards.setBounds(450, 400, 350, 300);
 
         gameplayPage.add(currentGameCards);
         gameplayPage.add(optionBoardCards);
