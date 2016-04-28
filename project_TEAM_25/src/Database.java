@@ -19,8 +19,6 @@ import java.util.List;
  */
 
 public class Database {
-
-	private String winner;
 	
 	/** an empty constructor of the database class
 	 * 
@@ -81,4 +79,19 @@ public class Database {
         }
 		return scoreList;
 	}
+	
+	/**
+	 * resetScores - resetScores function to delete the list of the score from a file named scoresDatabase.txt
+	 */
+	public void resetScores()
+	{
+		try(FileWriter fw = new FileWriter("ScoreDatabase\\scoresDatabase.txt", false);
+			    BufferedWriter bw = new BufferedWriter(fw);
+			    PrintWriter out = new PrintWriter(bw))
+			{
+			    out.print("");
+			} catch (IOException e) {    
+			}
+		
+    }
 }
