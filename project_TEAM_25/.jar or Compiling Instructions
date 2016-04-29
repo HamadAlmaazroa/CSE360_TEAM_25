@@ -1,0 +1,3 @@
+Since the .jar file do not have a write permission; thus, it need to be in the same directory as the folder ScoreDatabase that has the file scoresDatabase.txt, in order to write to the file and read from it.
+
+For compiling the project The folder Image that has the images required, and ScoreDatabase that has to be in the same directory as the executable file generated from compiling the code.
