@@ -40,7 +40,8 @@ public class GameInterface extends JFrame {
     private final static String namePageRef = "namePage";
     private final static String gameScoresPageRef = "gameScoresPage";
     private final static String gamePlayPageRef = "gamePlayPage";
-    
+    private final static String instructionsRef = "instructionsPage";
+
     /** String reference for the Cards in the gamePlay JPanel
 	 *  */
     private final static String throwDiceRef = "throwDice";
@@ -48,7 +49,7 @@ public class GameInterface extends JFrame {
     private final static String optionsBoredButtonRef = "optionsBoredButton";
     private final static String optionsBoredRef = "optionsBored";
 
-    private JPanel pagesCards, titlePagePanel, namePage, gameScoresPage, gameplayPage;
+    private JPanel pagesCards, titlePagePanel, namePage, gameScoresPage, gameplayPage, instructionsPage;
     private JLabel winnerLabel, gamePagePlayer1Score, gamePagePlayer2Score, currentTurnLabel,helpRangeText,helpEvenOddText;
     private JLabel diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6;
     private JButton playAnother,  throwDiceB;
@@ -81,13 +82,14 @@ public class GameInterface extends JFrame {
         namePage();
         scoresPage();     
         gamePlayPage();
-
+        instructionsPage();
+        
         //Create the panel that contains the "cards".
         pagesCards.add(titlePagePanel,titlePagePanelRef);
         pagesCards.add(namePage,namePageRef);
         pagesCards.add(gameScoresPage,gameScoresPageRef);
         pagesCards.add(gameplayPage,gamePlayPageRef);
-
+        pagesCards.add(instructionsPage,instructionsRef);
         
         frame.add(pagesCards);
         frame.setPreferredSize(new Dimension(800, 600));
@@ -276,11 +278,73 @@ public class GameInterface extends JFrame {
 
     /** The method for the initiation of the name page and its buttons, and labels.
    	 *  */
+    private void instructionsPage()
+    {
+    	JLabel instructionsTitleLabel, instructionsText1, instructionsText2, instructionsText3, instructionsHeadPoints1, instructionsHeadPoints2, instructionsHeadPoints3 ;
+    	JButton instructionsBack;
+    	JPanel instructionsButtons, textPanel;
+    	
+    	instructionsPage = new JPanel(new BorderLayout());
+    			
+    	instructionsTitleLabel = new JLabel("Game Instructions", SwingConstants.CENTER);
+    	instructionsTitleLabel.setFont(new Font("Serif", Font.PLAIN, 50));
+    	instructionsPage.add(instructionsTitleLabel, BorderLayout.PAGE_START);
+    	
+    	textPanel = new JPanel(null);
+        instructionsPage.add(textPanel,BorderLayout.CENTER);
+        
+        instructionsHeadPoints1 = createLabel("Normal Mode:",23, 5, 0, 500, 100, Color.magenta);
+        textPanel.add(instructionsHeadPoints1);
+        
+        instructionsText1 = createLabel("<html>First, Player 1 throw the dice, and Player 2 try to guess the total number of the thrown dice.<br>"
+        		+ "If the guessed number is the same, Player 2 gets 15 points.<br>"
+        		+ "If the gueesed number is with in 5 numbers, Player 2 gets 4 points.<br>"
+        		+ "If the gueesed number is with in 10 numbers, Player 2 gets 2 points.<br>"
+        		+ "If the gueesed number is with in more than 10 numbers, Player 1 gets 3 points.<br>"
+        		+ "After the turn ends, Player 1 and Player 2 switch role.</html>",18, 5, 30, 800, 200, Color.black);
+        textPanel.add(instructionsText1);
+        
+        instructionsHeadPoints2 = createLabel("Challenge Mode:",23, 5, 165, 500, 100, Color.magenta);
+        textPanel.add(instructionsHeadPoints2);
+        
+        instructionsText2 = createLabel("<html>Challenge Mode is the same as Normal Mode<br>"
+        		+ "However, The player guessing the total of the dice will lose the same number of point<br>"
+        		+ "as the highest number of matched dice<br>"
+        		+ "For Example, if the dice were 5,5,4,2,1,5 Then the player guessing will lose 3 points.</html>",18, 5, 175, 800, 200, Color.black);
+        textPanel.add(instructionsText2);
+        
+        instructionsHeadPoints3 = createLabel("Option Board:",23, 5, 290, 500, 100, Color.magenta);
+        textPanel.add(instructionsHeadPoints3);
+        
+        instructionsText3 = createLabel("<html>Using the Option Board has a Penalty<br>"
+        		+ "When Range is used, The guessing Player either get 5 point for the correct total, or 0 points.<br>"
+        		+ "When Even Odd is used, The guessing Player will only get half of the points.</html>",18, 5, 295, 800, 200, Color.black);
+        textPanel.add(instructionsText3);
+
+        instructionsBack = new JButton("Back to name page");
+        instructionsBack.setPreferredSize(new Dimension(280, 40));
+        instructionsBack.setFont(new Font("SansSerif", Font.PLAIN, 25));
+        instructionsBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                CardLayout cl = (CardLayout) (pagesCards.getLayout());
+                cl.show(pagesCards, namePageRef);
+            }
+        });
+        
+        instructionsButtons = new JPanel();
+        instructionsButtons.add(instructionsBack);
+        instructionsPage.add(instructionsButtons,BorderLayout.PAGE_END);
+        
+    }
+    
+    /** The method for the initiation of the name page and its buttons, and labels.
+   	 *  */
     private void namePage()
     {
         JPanel nameButtonPanel;
         JLabel namePageJLabel, player1NameLabel, player2NameLabel;
-        JButton nameBackToTitleB, nametoGameB;
+        JButton nameBackToTitleB, nametoGameB, instructionsButton;
         JRadioButton normalRadio, challengeRadio;
         JTextField player1NameText, player2NameText; 
     	
@@ -344,6 +408,18 @@ public class GameInterface extends JFrame {
             }
         });
         
+        instructionsButton = new JButton("Game Instructions");
+        instructionsButton.setPreferredSize(new Dimension(280, 50));
+        instructionsButton.setFont(new Font("Serif", Font.PLAIN, 30));
+        instructionsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                CardLayout cl = (CardLayout) (pagesCards.getLayout());//get cards
+                cl.show(pagesCards, instructionsRef);  
+            }
+        });
+        
+        
         nametoGameB = new JButton("Continue");
         nametoGameB.setPreferredSize(new Dimension(220, 50));
         nametoGameB.setFont(new Font("Serif", Font.PLAIN, 30));
@@ -363,6 +439,7 @@ public class GameInterface extends JFrame {
         nameButtonPanel = new JPanel();
         nameButtonPanel.add(nametoGameB);
         nameButtonPanel.add(nameBackToTitleB);
+        nameButtonPanel.add(instructionsButton);
         nameButtonPanel.setBounds( 120, 400, 550, 350 );
         namePage.add(nameButtonPanel, BorderLayout.SOUTH);
     }
